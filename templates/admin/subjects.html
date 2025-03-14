@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Subjects</title>
+</head>
+<body>
+    <h2>Subjects</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Subject Name" required>
+        <input type="text" name="description" placeholder="Description">
+        <button type="submit">Add Subject</button>
+    </form>
+
+    <ul>
+        {% for subject in subjects %}
+            <li>{{ subject.name }} 
+                <form method="POST" action="{{ url_for('admin.delete_subject', subject_id=subject.id) }}" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

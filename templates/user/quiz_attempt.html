@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Attempt Quiz</title>
+    <script src="{{ url_for('static', filename='js/quiz_timer.js') }}" defer></script> 
+</head>
+<body>
+    <h2>Quiz: {{ quiz.chapter.name }}</h2>
+
+    <p><strong>Time Remaining:</strong> <span id="timer"></span></p>
+
+    <form id="quizForm" method="POST">
+        {% for question in questions %}
+            <p>{{ question.question_statement }}</p>
+            <input type="radio" name="question_{{ question.id }}" value="1"> {{ question.option1 }} <br>
+            <input type="radio" name="question_{{ question.id }}" value="2"> {{ question.option2 }} <br>
+            <input type="radio" name="question_{{ question.id }}" value="3"> {{ question.option3 }} <br>
+            <input type="radio" name="question_{{ question.id }}" value="4"> {{ question.option4 }} <br>
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
+    </form>
+</body>
+</html>

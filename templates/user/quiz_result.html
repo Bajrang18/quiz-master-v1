@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quiz Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Include Chart.js -->
+</head>
+<body>
+    <h2>Your Quiz Scores</h2>
+    <canvas id="scoreChart"></canvas>  <!-- Chart Placeholder -->
+
+    <ul>
+        {% for score in scores %}
+            <li>
+                Quiz ID: {{ score.quiz_id }} | Score: {{ score.total_scored }} / {{ score.total_questions }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scoreData = {{ score_data | tojson }};  // Pass data from Flask to JavaScript
+
+            const quizLabels = scoreData.map(score => "Quiz " + score.quiz_id);
+            const userScores = scoreData.map(score => score.total_scored);
+            const totalQuestions = scoreData.map(score => score.total_questions);
+
+            const ctx = document.getElementById("scoreChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: quizLabels,
+                    datasets: [
+                        {
+                            label: "Your Score",
+                            data: userScores,
+                            backgroundColor: "rgba(54, 162, 235, 0.6)"
+                        },
+                        {
+                            label: "Total Questions",
+                            data: totalQuestions,
+                            backgroundColor: "rgba(255, 99, 132, 0.6)"
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

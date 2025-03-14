@@ -1,5 +1,12 @@
-{% extends 'layout.html' %}
-
-{% block content %}
-    This is the content of the index page of quiz master
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quiz Master</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to Quiz Master</h1>
+    <a href="{{ url_for('auth.login') }}">Login</a> | 
+    <a href="{{ url_for('auth.register') }}">Register</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h2>Available Quizzes</h2>
+    <ul>
+        {% for quiz in quizzes %}
+            <li>
+                {{ quiz.chapter.name }} - {{ quiz.date_of_quiz }}
+                <a href="{{ url_for('user.attempt_quiz', quiz_id=quiz.id) }}">Take Quiz</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('user.scores') }}">View Scores</a> |
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+</body>
+</html>

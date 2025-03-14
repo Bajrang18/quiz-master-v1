@@ -1,30 +1,29 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/form_validation.js') }}" defer></script>
+</head>
+<body>
+    <h2>Register</h2>
+    <form id="registerForm" method="POST">
+        <input type="email" name="username" id="username" placeholder="Email (Username)" required>
+        <span class="error-message" id="usernameError"></span>
 
-{% block title %}
-    Register Page
-{% endblock %}
-{% block content %}
-<h1 class="display-1">Register</h1>
+        <input type="password" name="password" id="password" placeholder="Password (Min. 6 characters)" required minlength="6">
+        <span class="error-message" id="passwordError"></span>
 
-<form action="" class="form" method="post">
-    <div class="form-group">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" required class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" required class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="confirm_password" class="form-label">Confirm Password</label>
-        <input type="password" name="confirm_password" required class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" name="name" class="form-control">
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Register" class="btn btn-primary">
-    </div>
-</form>
-{% endblock %}
+        <input type="text" name="full_name" id="full_name" placeholder="Full Name" required>
+        <span class="error-message" id="fullNameError"></span>
+
+        <input type="text" name="qualification" id="qualification" placeholder="Qualification">
+        
+        <input type="date" name="dob" id="dob" required>
+        <span class="error-message" id="dobError"></span>
+
+        <button type="submit">Register</button>
+    </form>
+    <a href="{{ url_for('auth.login') }}">Login</a>
+</body>
+</html>
