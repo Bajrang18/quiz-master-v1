@@ -41,14 +41,14 @@ def create_app(config_class=Config):
 
 def create_admin():
     # Check if admin already exists
-    admin = User.query.filter_by(username='admin@quiz.com').first()
+    admin = User.query.filter_by(username='admin').first()
     if not admin:
         admin = User(
-            username='admin@quiz.com',
+            username='admin',
             full_name='Quiz Master Admin',
             is_admin=True
         )
-        admin.set_password('admin123')
+        admin.set_password('admin')
         db.session.add(admin)
         db.session.commit()
 

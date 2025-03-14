@@ -11,14 +11,23 @@
         <button type="submit">Add Subject</button>
     </form>
 
-    <ul>
-        {% for subject in subjects %}
-            <li>{{ subject.name }} 
-                <form method="POST" action="{{ url_for('admin.delete_subject', subject_id=subject.id) }}" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+    <tr>
+        <th>Subject Name</th>
+        <th>Actions</th>
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td>{{ subject.name }}</td>
+        <td>
+            <a href="{{ url_for('admin.chapters', subject_id=subject.id) }}">View Chapters</a>
+            <form method="POST" action="{{ url_for('admin.delete_subject', subject_id=subject.id) }}" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
 </body>
 </html>

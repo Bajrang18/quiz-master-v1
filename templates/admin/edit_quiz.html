@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Quiz</title>
+</head>
+<body>
+    <h2>Edit Quiz</h2>
+
+    <form method="POST">
+        <label for="date_of_quiz">Date of Quiz:</label>
+        <input type="date" id="date_of_quiz" name="date_of_quiz" value="{{ quiz.date_of_quiz }}" required>
+
+        <label for="time_duration">Time Duration (HH:MM):</label>
+        <input type="text" id="time_duration" name="time_duration" value="{{ quiz.time_duration }}" required>
+
+        <label for="remarks">Remarks (Optional):</label>
+        <input type="text" id="remarks" name="remarks" value="{{ quiz.remarks }}">
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="{{ url_for('admin.quizzes', chapter_id=quiz.chapter_id) }}">Back to Quizzes</a>
+</body>
+</html>

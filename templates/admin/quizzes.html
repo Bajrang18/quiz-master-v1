@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Quizzes</title>
+</head>
+<body>
+    <h2>Quizzes for Chapter: {{ chapter.name }}</h2>
+
+    <a href="{{ url_for('admin.add_quiz', chapter_id=chapter.id) }}">Add Quiz</a>
+
+    <table>
+        <tr>
+            <th>Quiz Date</th>
+            <th>Time Duration</th>
+            <th>Actions</th>
+        </tr>
+        {% for quiz in quizzes %}
+        <tr>
+            <td>{{ quiz.date_of_quiz }}</td>
+            <td>{{ quiz.time_duration }}</td>
+            <td>
+                <a href="{{ url_for('admin.questions', quiz_id=quiz.id) }}">View Questions</a>
+                <a href="{{ url_for('admin.edit_quiz', quiz_id=quiz.id) }}">Edit</a>
+                <form method="POST" action="{{ url_for('admin.delete_quiz', quiz_id=quiz.id) }}" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

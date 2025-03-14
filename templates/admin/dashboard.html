@@ -5,7 +5,9 @@
 </head>
 <body>
     <h2>Admin Dashboard</h2>
+
     <a href="{{ url_for('admin.subjects') }}">Manage Subjects</a> |
+    <a href="{{ url_for('admin.chapters', subject_id=1) }}">Manage Chapters</a> |  <!-- Fix: Added this -->
     <a href="{{ url_for('admin.users') }}">Manage Users</a> |
     <a href="{{ url_for('auth.logout') }}">Logout</a>
 </body>
