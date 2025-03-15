@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
     <title>Attempt Quiz</title>
-    <script src="{{ url_for('static', filename='js/quiz_timer.js') }}" defer></script> 
+    <script>
+        var quizDuration = "{{ quiz.time_duration }}"; // Passing time from Flask to JavaScript
+    </script>
+    <script src="{{ url_for('static', filename='js/quiz_timer.js') }}" defer></script>
 </head>
 <body>
     <h2>Quiz: {{ quiz.chapter.name }}</h2>
 
-    <p><strong>Time Remaining:</strong> <span id="timer"></span></p>
+    <!-- Timer Display -->
+    <p><strong>Time Remaining:</strong> <span id="timer"></span></p>  
 
     <form id="quizForm" method="POST">
         {% for question in questions %}

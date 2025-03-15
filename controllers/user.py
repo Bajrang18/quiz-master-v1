@@ -21,7 +21,6 @@ def attempt_quiz(quiz_id):
         total_questions = len(questions)
         total_correct = 0
 
-        # Check if the user answered all questions
         for question in questions:
             selected_option = request.form.get(f'question_{question.id}')
             if selected_option is None:
@@ -31,7 +30,6 @@ def attempt_quiz(quiz_id):
             if int(selected_option) == question.correct_option:
                 total_correct += 1
 
-        # Save the quiz result
         score = Score(quiz_id=quiz.id, user_id=current_user.id, total_scored=total_correct, total_questions=total_questions)
         db.session.add(score)
         db.session.commit()
