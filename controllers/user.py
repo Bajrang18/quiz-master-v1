@@ -5,11 +5,13 @@ from datetime import datetime
 
 user_bp = Blueprint('user', __name__)
 
+
 @user_bp.route('/dashboard')
 @login_required
 def dashboard():
     quizzes = Quiz.query.all()
     return render_template('user/dashboard.html', quizzes=quizzes)
+
 
 @user_bp.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
 @login_required
@@ -38,6 +40,7 @@ def attempt_quiz(quiz_id):
         return redirect(url_for('user.scores'))
 
     return render_template('user/quiz_attempt.html', quiz=quiz, questions=questions)
+
 
 @user_bp.route('/scores')
 @login_required

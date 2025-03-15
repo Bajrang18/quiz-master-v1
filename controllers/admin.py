@@ -19,6 +19,7 @@ def admin_required(func):
 def dashboard():
     return render_template('admin/dashboard.html')
 
+
 @admin_bp.route('/subjects', methods=['GET', 'POST'])
 @admin_required
 def subjects():
@@ -37,6 +38,7 @@ def subjects():
     
     subjects = Subject.query.all()
     return render_template('admin/subjects.html', subjects=subjects)
+
 
 @admin_bp.route('/subjects/delete/<int:subject_id>', methods=['POST'])
 @admin_required
@@ -74,6 +76,7 @@ def add_subject():
 
     return render_template('admin/add_subject.html')
 
+
 @admin_bp.route('/quizzes/add/<int:chapter_id>', methods=['GET', 'POST'])
 @admin_required
 def add_quiz(chapter_id):
@@ -103,11 +106,13 @@ def add_quiz(chapter_id):
 
     return render_template('admin/add_quiz.html', chapter=chapter)
 
+
 @admin_bp.route('/users')
 @admin_required
 def users():
     users = User.query.filter_by(is_admin=False).all()  # Only show non-admin users
     return render_template('admin/users.html', users=users)
+
 
 @admin_bp.route('/users/delete/<int:user_id>', methods=['POST'])
 @admin_required
@@ -156,6 +161,7 @@ def add_chapter(subject_id):
 
     return render_template('admin/add_chapter.html', subject=subject)
 
+
 @admin_bp.route('/chapters/edit/<int:chapter_id>', methods=['GET', 'POST'])
 @admin_required
 def edit_chapter(chapter_id):
@@ -178,6 +184,7 @@ def edit_chapter(chapter_id):
 
     return render_template('admin/edit_chapter.html', chapter=chapter)
 
+
 @admin_bp.route('/chapters/delete/<int:chapter_id>', methods=['POST'])
 @admin_required
 def delete_chapter(chapter_id):
@@ -197,6 +204,7 @@ def quizzes(chapter_id):
     quizzes = Quiz.query.filter_by(chapter_id=chapter_id).all()
 
     return render_template('admin/quizzes.html', chapter=chapter, quizzes=quizzes)
+
 
 @admin_bp.route('/quizzes/edit/<int:quiz_id>', methods=['GET', 'POST'])
 @admin_required
@@ -278,6 +286,7 @@ def add_question(quiz_id):
         return redirect(url_for('admin.questions', quiz_id=quiz_id))
 
     return render_template('admin/add_question.html', quiz=quiz)
+
 
 @admin_bp.route('/questions/edit/<int:question_id>', methods=['GET', 'POST'])
 @admin_required
