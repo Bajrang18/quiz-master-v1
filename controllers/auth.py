@@ -6,6 +6,7 @@ import re
 
 auth_bp = Blueprint('auth', __name__)
 
+
 @auth_bp.route('/')
 def index():
     if current_user.is_authenticated:
@@ -14,6 +15,7 @@ def index():
         else:
             return redirect(url_for('user.dashboard'))
     return render_template('index.html')
+
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():

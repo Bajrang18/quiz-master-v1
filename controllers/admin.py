@@ -5,6 +5,7 @@ from datetime import datetime
 
 admin_bp = Blueprint('admin', __name__)
 
+
 def admin_required(func):
     def wrapper(*args, **kwargs):
         if not current_user.is_admin:
@@ -58,14 +59,17 @@ def add_subject():
         name = request.form.get('name').strip()
         description = request.form.get('description').strip()
 
+
         if not name:
             flash('Subject name is required.', 'danger')
             return redirect(url_for('admin.add_subject'))
+
 
         # Prevent duplicate subjects
         if Subject.query.filter_by(name=name).first():
             flash('Subject already exists.', 'danger')
             return redirect(url_for('admin.add_subject'))
+
 
         subject = Subject(name=name, description=description)
         db.session.add(subject)
@@ -206,6 +210,7 @@ def quizzes(chapter_id):
     return render_template('admin/quizzes.html', chapter=chapter, quizzes=quizzes)
 
 
+
 @admin_bp.route('/quizzes/edit/<int:quiz_id>', methods=['GET', 'POST'])
 @admin_required
 def edit_quiz(quiz_id):
@@ -232,6 +237,7 @@ def edit_quiz(quiz_id):
 
     return render_template('admin/edit_quiz.html', quiz=quiz)
 
+
 @admin_bp.route('/quizzes/delete/<int:quiz_id>', methods=['POST'])
 @admin_required
 def delete_quiz(quiz_id):
@@ -244,6 +250,7 @@ def delete_quiz(quiz_id):
     flash('Quiz deleted successfully!', 'success')
     return redirect(url_for('admin.quizzes', chapter_id=chapter_id))
 
+
 @admin_bp.route('/questions/<int:quiz_id>')
 @admin_required
 def questions(quiz_id):
@@ -251,6 +258,7 @@ def questions(quiz_id):
     questions = Question.query.filter_by(quiz_id=quiz_id).all()
 
     return render_template('admin/questions.html', quiz=quiz, questions=questions)
+
 
 @admin_bp.route('/questions/add/<int:quiz_id>', methods=['GET', 'POST'])
 @admin_required
@@ -318,6 +326,7 @@ def edit_question(question_id):
         return redirect(url_for('admin.questions', quiz_id=question.quiz_id))
 
     return render_template('admin/edit_question.html', question=question)
+
 
 @admin_bp.route('/questions/delete/<int:question_id>', methods=['POST'])
 @admin_required

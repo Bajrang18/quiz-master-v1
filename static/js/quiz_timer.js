@@ -8,12 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeRemaining = parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);  // Convert to seconds
 
     const timerDisplay = document.getElementById("timer");
+    
     const quizForm = document.getElementById("quizForm");
 
     function updateTimer() {
         let minutes = Math.floor(timeRemaining / 60);
         let seconds = timeRemaining % 60;
         timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
 
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
@@ -26,4 +28,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateTimer();
     let timerInterval = setInterval(updateTimer, 1000);
+
 });

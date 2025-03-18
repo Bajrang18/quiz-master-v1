@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from models import db, Quiz, Score, Question
 from datetime import datetime
 
+
 user_bp = Blueprint('user', __name__)
 
 
@@ -11,6 +12,7 @@ user_bp = Blueprint('user', __name__)
 def dashboard():
     quizzes = Quiz.query.all()
     return render_template('user/dashboard.html', quizzes=quizzes)
+
 
 
 @user_bp.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
@@ -40,6 +42,7 @@ def attempt_quiz(quiz_id):
         return redirect(url_for('user.scores'))
 
     return render_template('user/quiz_attempt.html', quiz=quiz, questions=questions)
+
 
 
 @user_bp.route('/scores')
